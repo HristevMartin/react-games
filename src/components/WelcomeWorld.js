@@ -47,9 +47,6 @@ const WelcomeWorld = () => {
                     <a href="#" className="btn details-btn">Details</a>
                 </div>
             </div>
-
-
-           
         </div>
         <p className="no-articles">No games yet</p>
     </section>

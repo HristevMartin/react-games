@@ -1,8 +1,12 @@
 import {createElement, useState} from 'react';
 import Header from "./components/Header";
 import WelcomeWorld from "./components/WelcomeWorld";
-import GameCatalog from './components/GameCatalog';
-import CreateGame from './components/CreateGame'
+import GameCatalog from './components/GameCatalog/GameCatalog';
+import CreateGame from './components/CreateGame.js';
+import Login from './components/Login'
+import Register from './components/Register';
+import ErrorPage from './components/ErrorPage';
+import GameCard from './components/GameCatalog/GameCard';
 
 function App() {
   // page is immutable
@@ -13,9 +17,12 @@ function App() {
     '/home': <WelcomeWorld/>,
     '/games': <GameCatalog />,
     '/create-game': <CreateGame />,
+    '/login': <Login/>,
+    '/register': <Register/>,
   }
 
   const navigationChangeHandler = (path) => {
+      console.log(path)
       setPage(path)
   }
 
@@ -26,8 +33,10 @@ function App() {
         navigationChangeHandler={navigationChangeHandler}
         />
 
+      
+
         <main id="main-content">
-          {routes[page] || <h2>No Page Found</h2>}
+          {routes[page] || <ErrorPage>Some info</ErrorPage>}
         </main>
     </div>
   );

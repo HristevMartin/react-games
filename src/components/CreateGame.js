@@ -1,4 +1,5 @@
-const createGame = () => {
+const CreateGame = () => {
+    console.log('been in the create games')
     return (
         <section id="create-page" className="auth">
             <form id="create">
@@ -26,4 +27,4 @@ const createGame = () => {
     )
 }
 
-export default createGame;
+export default CreateGame;
