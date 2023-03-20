@@ -7,24 +7,36 @@ import Login from './components/Login'
 import Register from './components/Register';
 import ErrorPage from './components/ErrorPage';
 import GameCard from './components/GameCatalog/GameCard';
+import GameDetails from './components/GameDetails';
 
 function App() {
   // page is immutable
   // setPage is a function which holds the current state.
   const [page,setPage] = useState('/home');
 
-  const routes = {
-    '/home': <WelcomeWorld/>,
-    '/games': <GameCatalog />,
-    '/create-game': <CreateGame />,
-    '/login': <Login/>,
-    '/register': <Register/>,
+  const navigationChangeHandler = (path) => {
+    setPage(path)
+}
+
+
+
+  const router = (path) => {
+    let pathName = path.split('/')
+    let rootPath = pathName[1];
+    let argument = pathName[2];
+
+    const routes = {
+      'home': <WelcomeWorld navigationChangeHandler={navigationChangeHandler} />,
+      'games': <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
+      'create-game': <CreateGame />,
+      'login': <Login/>,
+      'register': <Register/>,
+      'details': <GameDetails id={argument}/>
+    }
+
+    return routes[rootPath]
   }
 
-  const navigationChangeHandler = (path) => {
-      console.log(path)
-      setPage(path)
-  }
 
   return (
     <div id="box">
@@ -33,10 +45,8 @@ function App() {
         navigationChangeHandler={navigationChangeHandler}
         />
 
-      
-
         <main id="main-content">
-          {routes[page] || <ErrorPage>Some info</ErrorPage>}
+          {router(page) || <ErrorPage>Some info</ErrorPage>}
         </main>
     </div>
   );
